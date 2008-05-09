@@ -16,7 +16,9 @@ class WordDocument(Part):
 		self.xml.append(self.body)
 
 	def dump(self):
-		return ElementTree.tostring(self.xml, self.encoding or 'utf-8')
+		if self.body:
+			return ElementTree.tostring(self.xml, self.encoding or 'utf-8')
+		return Part.dump(self)
 
 	def paragraph(self, text=None):
 		p = paragraph(text)

@@ -1,7 +1,7 @@
 from openpack.basepack import Part
 from openpack.officepack import OfficePackage
 from xml.etree import ElementTree
-from util import ns
+from util import ns, properties
 
 w = ns.w
 
@@ -32,14 +32,18 @@ class WordDocument(Part):
 	def paragraphs(self):
 		return self.body.find(ns.nsify('w', 'p'))
 
-def addstyle(element, stylename):
+def style(element, stylename):
+	props = properties(element)
+	props.append(w('pStyle', val=stylename))
+	return props
+
+def properties(element):
 	basetag = element.tag.split('}')[1]
 	proptag = "%sPr" % basetag
 	props = element.find(ns.nsify('w', proptag))
 	if not props:
 		props = w(proptag)
 		element.append(props)
-	props.append(w('pStyle', val=stylename))
 	return props
 
 def paragraph(text=None):

@@ -1,4 +1,5 @@
 from xml.etree.ElementTree import Element
+import re
 
 class NameSpace(object):
 	map = {
@@ -22,4 +23,13 @@ class NameSpace(object):
 		return "{%s}%s" % (self.map[prefix], tag)
 
 ns = NameSpace()
+
+def properties(element):
+	basetag = element.tag.split('}')[1]
+	proptag = "%sPr" % basetag
+	props = element.find(ns.nsify('w', proptag))
+	if not props:
+		props = ns.w(proptag)
+		element.append(props)
+	return props
 

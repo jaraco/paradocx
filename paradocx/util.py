@@ -1,35 +1,22 @@
-from xml.etree.ElementTree import Element
+from lxml.etree import Element
+from lxml import builder
 import re
 
-class NameSpace(object):
-	map = {
-		'w' : "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
-		'r' : 'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
-		've' : 'http://schemas.openxmlformats.org/markup-compatibility/2006',
-		'wp' : 'http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing',
-	}
+from openpack.basepack import ooxml_namespaces
 
-	def __getattr__(self, prefix):
-		if prefix in self.map:
-			def wrap(tag, **params):
-				attrs = {}
-				for name, value in params.iteritems():
-					attrs[self.nsify(prefix, name)] = value
-				return Element(self.nsify(prefix, tag), **attrs)
-			return wrap
-		raise AttributeError(prefix)
+docx_namespaces = {
+	'w' : "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
+	'r' : 'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
+	've' : 'http://schemas.openxmlformats.org/markup-compatibility/2006',
+	'wp' : 'http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing',
+	'v' : 'urn:schemas-microsoft-com:vml',
+}
+docx_namespaces.update(ooxml_namespaces)
 
-	def nsify(self, prefix, tag):
-		return "{%s}%s" % (self.map[prefix], tag)
+class ElementMaker(builder.ElementMaker):
+	def __getitem__(self, name):
+		return "%s%s" % (self._namespace, name)
 
-ns = NameSpace()
-
-def properties(element):
-	basetag = element.tag.split('}')[1]
-	proptag = "%sPr" % basetag
-	props = element.find(ns.nsify('w', proptag))
-	if not props:
-		props = ns.w(proptag)
-		element.append(props)
-	return props
+w = ElementMaker(namespace=docx_namespaces['w'], nsmap=docx_namespaces)
+dcterms = ElementMaker(namespace=docx_namespaces['dcterms'], nsmap=docx_namespaces)
 

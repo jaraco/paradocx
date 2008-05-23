@@ -1,9 +1,8 @@
 from openpack.basepack import Part
 from openpack.officepack import OfficePackage
-from xml.etree import ElementTree
-from util import ns, properties
-
-w = ns.w
+from lxml.etree import Element, SubElement, tostring
+from lxml.builder import ElementMaker
+from util import w
 
 class WordDocument(Part):
 	content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
@@ -11,13 +10,13 @@ class WordDocument(Part):
 
 	def __init__(self, package, name, growth_hint=None, fp=None):
 		Part.__init__(self, package, name, growth_hint, fp)
-		self.xml = w('document')
-		self.body = w('body')
+		self.xml = w.document()
+		self.body = w.body()
 		self.xml.append(self.body)
 
 	def dump(self):
 		if self.body:
-			return ElementTree.tostring(self.xml, self.encoding or 'utf-8')
+			return tostring(self.xml, encoding=self.encoding or 'utf-8')
 		return Part.dump(self)
 
 	def paragraph(self, text=None):
@@ -32,43 +31,41 @@ class WordDocument(Part):
 
 	@property
 	def paragraphs(self):
-		return self.body.find(ns.nsify('w', 'p'))
+		return self.body.findall(w['p'])
 
-def style(element, stylename):
-	props = properties(element)
-	props.append(w('pStyle', val=stylename))
-	return props
-
-def properties(element):
-	basetag = element.tag.split('}')[1]
-	proptag = "%sPr" % basetag
-	props = element.find(ns.nsify('w', proptag))
-	if not props:
-		props = w(proptag)
-		element.append(props)
-	return props
-
-def paragraph(text=None):
-	p = w('p')
+def paragraph(text=None, style=None, pagebreak=None):
+	p = w.p()
+	subs = []
+	pPr = w.pPr()
+	if style:
+		pPr.append(
+			w.pStyle(attrib={w['val']:style})
+		)
+	if pagebreak:
+		pPr.append(
+			w.sectPr()
+		)
+	if len(pPr):
+		subs.append(pPr)
 	if text:
 		text = unicode(text)
-		t = w('t')
-		t.text = text
-		r = w('r')
-		r.append(t)
-		p.append(r)
+		subs.append(
+			w.r(
+				w.t(text)
+			)
+		)
+	p.extend(subs)
 	return p
 
 def table(data=None):
-	tbl = w('tbl')
+	tbl = w.tbl()
 	data = data or []
 	for cells in data:
-		tr = w('tr')
-		for value in cells:
-			tc = w('tc')
-			tc.append(paragraph(value))
-			tr.append(tc)
-		tbl.append(tr)
+		tbl.append(
+			w.tr(
+				*[w.tc(paragraph(value)) for value in cells]
+			)
+		)
 	return tbl
 	
 

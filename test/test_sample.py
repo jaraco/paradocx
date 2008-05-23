@@ -7,6 +7,7 @@ import common
 from paradocx.package import WordPackage
 from paradocx.document import WordDocument
 from paradocx.styles import StylesPart
+from paradocx.util import dcterms
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -29,5 +30,5 @@ class TestPackageReading(object):
 	
 	def test_core_props(self):
 		assert self.package.core_properties
-		assert self.package.core_properties.modified
+		assert id(self.package.core_properties.element.find(dcterms['modified']))
 

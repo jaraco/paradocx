@@ -7,6 +7,7 @@ import common
 from paradocx.package import WordPackage
 from paradocx.document import WordDocument
 from paradocx.styles import StylesPart
+from paradocx.util import w
 
 here = os.path.abspath(os.path.dirname(__file__))
 

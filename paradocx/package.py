@@ -37,20 +37,20 @@ class WordPackage(OfficePackage):
 		self.relate(start)
 
 	@handle(OfficePackage.main_rel)
-	def _load_word_doc(self, name, fp):
-		self[name] = WordDocument(self, name, fp=fp)
+	def _load_word_doc(self, name, data):
+		self[name] = WordDocument(self, name, data=data)
 
 	@handle(StylesPart.rel_type)
-	def _load_styles(self, name, fp):
-		self[name] = StylesPart(self, name, fp=fp)
+	def _load_styles(self, name, data):
+		self[name] = StylesPart(self, name, data=data)
 
 	@handle(HeaderPart.rel_type)
-	def _load_header(self, name, fp):
-		self[name] = HeaderPart(self, name, fp=fp)
+	def _load_header(self, name, data):
+		self[name] = HeaderPart(self, name, data=data)
 	
 	@handle(FooterPart.rel_type)
-	def _load_footer(self, name, fp):
-		self[name] = FooterPart(self, name, fp=fp)
+	def _load_footer(self, name, data):
+		self[name] = FooterPart(self, name, data=data)
 
 if __name__ == '__main__':
 	import sys
@@ -84,7 +84,7 @@ if __name__ == '__main__':
 </w:document>
 """ % (sys.version, zen)
 	op = WordPackage('test.docx')
-	op.start_part.fp.write(body.encode('utf-8'))
+	op.start_part.data = body.decode('utf-8')
 	op.core_properties = cp = CoreProperties(op, '/docProps/core.xml')
 	cp.encoding = 'utf-8'
 	op[cp.name] = cp

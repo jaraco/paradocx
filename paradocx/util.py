@@ -1,4 +1,4 @@
-from lxml.etree import Element
+from lxml.etree import Element, fromstring, tostring
 from lxml import builder
 import re
 
@@ -19,4 +19,22 @@ class ElementMaker(builder.ElementMaker):
 
 w = ElementMaker(namespace=docx_namespaces['w'], nsmap=docx_namespaces)
 dcterms = ElementMaker(namespace=docx_namespaces['dcterms'], nsmap=docx_namespaces)
+
+class TemplateSource(object):
+	template = None
+
+	def __init__(self, variables, encoding='utf-8'):
+		self.variables = variables
+		self.xml = self._from_template()
+		self.element = self._to_element()
+	
+	def _from_template(self):
+		"""Use self.template and self.variables to generate XML content."""
+		raise NotImplementedError
+
+	def _to_element(self):
+		return fromstring(self.xml)
+
+	def __str__(self):
+		return tostring(self.element, encoding=self.encoding)
 

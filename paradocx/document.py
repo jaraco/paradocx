@@ -8,15 +8,15 @@ class WordDocument(Part):
 	content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
 	rel_type = OfficePackage.main_rel
 
-	def __init__(self, package, name, growth_hint=None, fp=None):
-		Part.__init__(self, package, name, growth_hint, fp)
+	def __init__(self, package, name, growth_hint=None, data=None):
+		Part.__init__(self, package, name, growth_hint, data)
 		self.xml = w.document()
 		self.body = w.body()
 		self.xml.append(self.body)
 
 	def dump(self):
 		if self.body:
-			return tostring(self.xml, encoding=self.encoding or 'utf-8')
+			return tostring(self.xml, encoding='utf-8')
 		return Part.dump(self)
 
 	def paragraph(self, text=None):

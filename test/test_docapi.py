@@ -40,7 +40,7 @@ class TestDocAPI(object):
 	def test_open_generated(self):
 		self.package = WordPackage(self.filepath)
 		self.document = self.package.start_part
-		self.doctext = self.document.fp.read()
+		self.doctext = self.document.data
 	
 	def test_read_paragraph(self):
 		assert 'Hello World' in self.doctext

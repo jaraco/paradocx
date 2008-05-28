@@ -1,10 +1,9 @@
 from openpack.basepack import Part
 from openpack.officepack import OfficePackage
-from lxml.etree import Element, SubElement, tostring
-from lxml.builder import ElementMaker
+from lxml.etree import tostring
 from util import w
 
-class WordDocument(Part):
+class DocumentPart(Part):
 	content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
 	rel_type = OfficePackage.main_rel
 
@@ -15,57 +14,11 @@ class WordDocument(Part):
 		self.xml.append(self.body)
 
 	def dump(self):
-		if self.body:
-			return tostring(self.xml, encoding='utf-8')
+		if len(self.body):
+			t = tostring(self.xml, encoding='utf-8', pretty_print=True)
+			return t
 		return Part.dump(self)
-
-	def paragraph(self, text=None):
-		p = paragraph(text)
-		self.body.append(p)
-		return p
-
-	def table(self, data=None):
-		tbl = table(data)
-		self.body.append(tbl)
-		return tbl
-
-	@property
-	def paragraphs(self):
-		return self.body.findall(w['p'])
-
-def paragraph(text=None, style=None, pagebreak=None):
-	p = w.p()
-	subs = []
-	pPr = w.pPr()
-	if style:
-		pPr.append(
-			w.pStyle(attrib={w['val']:style})
-		)
-	if pagebreak:
-		pPr.append(
-			w.sectPr()
-		)
-	if len(pPr):
-		subs.append(pPr)
-	if text:
-		text = unicode(text)
-		subs.append(
-			w.r(
-				w.t(text)
-			)
-		)
-	p.extend(subs)
-	return p
-
-def table(data=None):
-	tbl = w.tbl()
-	data = data or []
-	for cells in data:
-		tbl.append(
-			w.tr(
-				*[w.tc(paragraph(value)) for value in cells]
-			)
-		)
-	return tbl
 	
+	def append(self, xml_element):
+		self.body.append(xml_element)
 

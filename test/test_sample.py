@@ -5,7 +5,7 @@ import py.test
 import common
 
 from paradocx.package import WordPackage
-from paradocx.document import WordDocument
+from paradocx.document import DocumentPart
 from paradocx.styles import StylesPart
 from paradocx.util import dcterms
 
@@ -19,7 +19,7 @@ class TestPackageReading(object):
 		assert self.package.name == os.path.join(here, 'resources/sample.docx')
 	
 	def test_start_part(self):
-		assert isinstance(self.package.start_part, WordDocument)
+		assert isinstance(self.package.start_part, DocumentPart)
 		assert self.package.start_part.name == '/word/document.xml'
 		assert self.package.start_part.name in self.package
 	

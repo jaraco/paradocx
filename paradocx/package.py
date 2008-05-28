@@ -1,7 +1,7 @@
 from openpack.basepack import DefaultType, OverrideType, Part, Relationship
 from openpack.officepack import OfficePackage
 from openpack.util import handle
-from document import WordDocument
+from document import DocumentPart
 from numbering import NumberingPart
 from styles import StylesPart
 from headerfooter import HeaderPart, FooterPart
@@ -25,7 +25,7 @@ class WordPackage(OfficePackage):
 				"rels",
 			)
 		)
-		start = WordDocument(self, '/word/document.xml')
+		start = DocumentPart(self, '/word/document.xml')
 		self.content_types.add(
 			OverrideType(
 				start.content_type,
@@ -38,7 +38,7 @@ class WordPackage(OfficePackage):
 
 	@handle(OfficePackage.main_rel)
 	def _load_word_doc(self, name, data):
-		self[name] = WordDocument(self, name, data=data)
+		self[name] = DocumentPart(self, name, data=data)
 
 	@handle(StylesPart.rel_type)
 	def _load_styles(self, name, data):

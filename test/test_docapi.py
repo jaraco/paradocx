@@ -4,18 +4,15 @@ import os
 import py.test
 import common
 
-from paradocx.package import WordPackage
-from paradocx.document import WordDocument
+from paradocx import Document, w
 from paradocx.styles import StylesPart
-from paradocx.util import w
 
 here = os.path.abspath(os.path.dirname(__file__))
 
 class TestDocAPI(object):
 	filepath = os.path.join(here, 'resources/apiout.docx')
 	def setup_class(cls):
-		cls.package = WordPackage(cls.filepath)
-		cls.document = cls.package.start_part
+		cls.document = Document(cls.filepath)
 
 	def test_add_paragraph(self):
 		assert not self.document.paragraphs
@@ -33,13 +30,11 @@ class TestDocAPI(object):
 		t = self.document.table(data)
 
 	def test_save(self):
-		self.package.save()
+		self.document.save()
 		self.document = None
-		self.package = None
 	
 	def test_open_generated(self):
-		self.package = WordPackage(self.filepath)
-		self.document = self.package.start_part
+		self.document = Document(self.filepath)
 		self.doctext = self.document.data
 	
 	def test_read_paragraph(self):

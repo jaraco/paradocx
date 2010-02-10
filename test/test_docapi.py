@@ -33,14 +33,14 @@ class TestDocAPI(object):
 		self.document.save()
 		self.document = None
 	
-	def test_open_generated(self):
+	def test_read_paragraph(self):
 		self.document = Document(self.filepath)
 		self.doctext = self.document.data
-	
-	def test_read_paragraph(self):
 		assert 'Hello World' in self.doctext
 
 	def test_read_table(self):
+		self.document = Document(self.filepath)
+		self.doctext = self.document.data
 		assert 'Christian' in self.doctext
 
 	def teardown_class(cls):

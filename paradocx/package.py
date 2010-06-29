@@ -8,6 +8,12 @@ from headerfooter import HeaderPart, FooterPart
 
 class WordPackage(OfficePackage):
 	def __init__(self, name):
+		"""
+		Construct a WordPackage.
+		
+		If name exists, it is opened. Otherwise, an empty WordPackage
+		is created.
+		"""
 		OfficePackage.__init__(self, name)
 		if not self._zipfile:
 			self.quickstart()

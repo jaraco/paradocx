@@ -2,15 +2,14 @@
 
 import os
 import py.test
-import common
 
 from paradocx import Document, w
 from paradocx.styles import StylesPart
 
-here = os.path.abspath(os.path.dirname(__file__))
+from common import get_resource_filename as res
 
 class TestDocAPI(object):
-	filepath = os.path.join(here, 'resources/apiout.docx')
+	filepath = res('apiout.docx')
 	def setup_class(cls):
 		cls.document = Document(cls.filepath)
 

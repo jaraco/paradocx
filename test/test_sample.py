@@ -1,6 +1,6 @@
 """Test the sample.docx provided by ooxmldeveloper.org."""
 
-import os
+import posixpath
 import py.test
 
 from paradocx.package import WordPackage
@@ -23,7 +23,7 @@ class TestPackageReading(object):
 		assert self.package.start_part.name in self.package
 	
 	def test_styles(self):
-		styles_path = os.path.join('/word', 'styles.xml')
+		styles_path = posixpath.join('/word', 'styles.xml')
 		assert styles_path in self.package.keys()
 		srel = self.package.start_part.related(StylesPart.rel_type)[0]
 		assert srel == self.package[styles_path]

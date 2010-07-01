@@ -10,8 +10,8 @@ from common import get_resource_filename as res
 
 class TestDocAPI(object):
 	filepath = res('apiout.docx')
-	def setup_class(cls):
-		cls.document = Document(cls.filepath)
+	def setup_method(self, method):
+		self.document = Document(self.filepath)
 
 	def test_add_paragraph(self):
 		assert not self.document.paragraphs
@@ -33,15 +33,20 @@ class TestDocAPI(object):
 		self.document = None
 	
 	def test_read_paragraph(self):
-		self.document = Document(self.filepath)
-		self.doctext = self.document.data
-		assert 'Hello World' in self.doctext
+		self.test_add_paragraph()
+		self.test_save()
+		document = Document(self.filepath)
+		doctext = document.data
+		assert 'Hello World' in doctext
 
 	def test_read_table(self):
-		self.document = Document(self.filepath)
-		self.doctext = self.document.data
-		assert 'Christian' in self.doctext
+		self.test_add_table()
+		self.test_save()
+		document = Document(self.filepath)
+		doctext = document.data
+		assert 'Christian' in doctext
 
-	def teardown_class(cls):
-		os.remove(cls.filepath)
+	def teardown_method(self, method):
+		if os.path.exists(self.filepath):
+			os.remove(self.filepath)
 

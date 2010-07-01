@@ -1,4 +1,4 @@
-from openpack.basepack import DefaultType, OverrideType, Part, Relationship
+from openpack.basepack import ContentType, Part, Relationship
 from openpack.officepack import OfficePackage
 from openpack.util import handle
 from document import DocumentPart
@@ -20,20 +20,20 @@ class WordPackage(OfficePackage):
 
 	def quickstart(self):
 		self.content_types.add(
-			DefaultType(
+			ContentType.Default(
 				"application/xml",
 				"xml",
 			)
 		)
 		self.content_types.add(
-			DefaultType(
+			ContentType.Default(
 				"application/vnd.openxmlformats-package.relationships+xml",
 				"rels",
 			)
 		)
 		start = DocumentPart(self, '/word/document.xml')
 		self.content_types.add(
-			OverrideType(
+			ContentType.Override(
 				start.content_type,
 				start.name,
 			)
@@ -62,7 +62,7 @@ if __name__ == '__main__':
 	import sys
 	from textwrap import dedent
 	from this import s as zen_encoded
-	from openpack.basepack import Relationships, CoreProperties, OverrideType
+	from openpack.basepack import Relationships, CoreProperties
 	
 	trun = """\
 	<w:p>

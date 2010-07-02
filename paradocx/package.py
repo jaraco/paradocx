@@ -7,16 +7,16 @@ from styles import StylesPart
 from headerfooter import HeaderPart, FooterPart
 
 class WordPackage(OfficePackage):
-	def __init__(self, name):
+	def __init__(self):
 		"""
 		Construct a WordPackage.
-		
-		If name exists, it is opened. Otherwise, an empty WordPackage
-		is created.
 		"""
-		OfficePackage.__init__(self, name)
-		if not self._zipfile:
-			self.quickstart()
+		super(WordPackage, self).__init__()
+		self.quickstart()
+
+	def _load(self, *args, **kwargs):
+		self.clear()
+		super(WordPackage, self)._load(*args, **kwargs)
 
 	def quickstart(self):
 		self.content_types.add(
@@ -39,8 +39,11 @@ class WordPackage(OfficePackage):
 			)
 		)
 		self[start.name] = start
-		self.start_part = start
 		self.relate(start)
+
+	def clear(self):
+		self.content_types.clear()
+		self.relationships.clear()
 
 	@handle(OfficePackage.main_rel)
 	def _load_word_doc(self, name, data):

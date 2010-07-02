@@ -11,7 +11,7 @@ from common import get_resource_filename as res
 class TestDocAPI(object):
 	filepath = res('apiout.docx')
 	def setup_method(self, method):
-		self.document = Document(self.filepath)
+		self.document = Document.from_file(self.filepath)
 
 	def test_add_paragraph(self):
 		assert not self.document.paragraphs

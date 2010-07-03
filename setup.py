@@ -5,7 +5,7 @@ setup(
     version="0.2",
     packages=['paradocx'],
 	install_requires=[
-		'openpack >= 0.3.3',
+		'openpack >= 0.4dev',
 	],
 )
 

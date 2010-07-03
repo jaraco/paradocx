@@ -1,21 +1,11 @@
 """Test the sample.docx provided by ooxmldeveloper.org."""
 
 import posixpath
-import py.test
 
 from paradocx.package import WordPackage
 from paradocx.document import DocumentPart
 from paradocx.styles import StylesPart
 from paradocx.util import dcterms
-
-import common
-
-# a couple of factories to supply args to test functions
-def pytest_funcarg__sample_stream(request):
-	return common.get_resource_stream('sample.docx')
-
-def pytest_funcarg__sample_filename(request):
-	return common.get_resource_filename('sample.docx')
 
 def test_open(sample_stream):
 	pkg = WordPackage.from_stream(sample_stream)

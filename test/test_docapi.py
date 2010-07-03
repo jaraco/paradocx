@@ -1,12 +1,7 @@
 """Test the sample.docx provided by ooxmldeveloper.org."""
 
-import os
-import py.test
-
 from paradocx import Document, w
 from paradocx.styles import StylesPart
-
-from common import get_resource_filename as res
 
 class TestDocAPI(object):
 	filepath = res('apiout.docx')
@@ -45,8 +40,3 @@ class TestDocAPI(object):
 		document = Document(self.filepath)
 		doctext = document.data
 		assert 'Christian' in doctext
-
-	def teardown_method(self, method):
-		if os.path.exists(self.filepath):
-			os.remove(self.filepath)
-

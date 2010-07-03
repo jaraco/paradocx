@@ -91,7 +91,7 @@ if __name__ == '__main__':
 		  </w:body>
 		</w:document>
 		""").lstrip() % (sys.version, zen)
-	op = WordPackage('test.docx')
+	op = WordPackage()
 	op.start_part.data = body.decode('utf-8')
 	op.core_properties = cp = CoreProperties(op, '/docProps/core.xml')
 	cp.encoding = 'utf-8'
@@ -99,5 +99,5 @@ if __name__ == '__main__':
 	op.content_types.add_override(cp)
 	op.relate(cp)
 	cp.creator = "Testy McTest"
-	op.save()
+	op.save('test.docx')
 

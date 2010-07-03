@@ -15,7 +15,8 @@ class WordPackage(OfficePackage):
 		self.quickstart()
 
 	def _load(self, *args, **kwargs):
-		self.clear()
+		# re-initialize this package without the quickstart
+		super(WordPackage, self).__init__()
 		super(WordPackage, self)._load(*args, **kwargs)
 
 	def quickstart(self):
@@ -40,10 +41,6 @@ class WordPackage(OfficePackage):
 		)
 		self[start.name] = start
 		self.relate(start)
-
-	def clear(self):
-		self.content_types.clear()
-		self.relationships.clear()
 
 	@handle(OfficePackage.main_rel)
 	def _load_word_doc(self, name, data):

@@ -1,42 +1,36 @@
 """Test the sample.docx provided by ooxmldeveloper.org."""
 
+from StringIO import StringIO
+
 from paradocx import Document, w
 from paradocx.styles import StylesPart
 
-class TestDocAPI(object):
-	filepath = res('apiout.docx')
-	def setup_method(self, method):
-		self.document = Document.from_file(self.filepath)
+def test_add_paragraph():
+	doc = Document()
+	assert not doc.paragraphs
+	p = doc.paragraph('Hello World!')
+	assert doc.paragraphs
 
-	def test_add_paragraph(self):
-		assert not self.document.paragraphs
-		p = self.document.paragraph('Hello World!')
-		assert self.document.paragraphs
-	
-	def test_add_table(self):
-		data = [
-			['Name', 'Age'],
-			['Christian', 29],
-			['Sarah', 28],
-			['Curtis', 4],
-			['Eli', 2],
-		]
-		t = self.document.table(data)
+def test_add_table(table_data):
+	doc = Document()
+	t = doc.table(table_data)
 
-	def test_save(self):
-		self.document.save()
-		self.document = None
-	
-	def test_read_paragraph(self):
-		self.test_add_paragraph()
-		self.test_save()
-		document = Document(self.filepath)
-		doctext = document.data
-		assert 'Hello World' in doctext
+def test_save():
+	doc = Document()
+	stream = StringIO()
+	doc._store(stream)
+	assert stream.tell() > 0
 
-	def test_read_table(self):
-		self.test_add_table()
-		self.test_save()
-		document = Document(self.filepath)
-		doctext = document.data
-		assert 'Christian' in doctext
+def test_read_paragraph(writable_filename):
+	doc = Document()
+	p = doc.paragraph('Hello World!')
+	doc.save(writable_filename)
+	doc = Document.from_file(writable_filename)
+	assert 'Hello World' in doc.data
+
+def test_read_table(table_data, writable_filename):
+	doc = Document()
+	t = doc.table(table_data)
+	doc.save(writable_filename)
+	doc = Document.from_file(writable_filename)
+	assert 'Christian' in doc.data

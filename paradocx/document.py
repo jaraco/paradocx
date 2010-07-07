@@ -7,8 +7,8 @@ class DocumentPart(Part):
 	content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
 	rel_type = OfficePackage.main_rel
 
-	def __init__(self, package, name, growth_hint=None, data=None):
-		Part.__init__(self, package, name, growth_hint, data)
+	def __init__(self, *args, **kwargs):
+		Part.__init__(self, *args, **kwargs)
 		self.xml = w.document()
 		self.body = w.body()
 		self.xml.append(self.body)

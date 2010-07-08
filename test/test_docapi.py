@@ -26,11 +26,11 @@ def test_read_paragraph(writable_filename):
 	p = doc.paragraph('Hello World!')
 	doc.save(writable_filename)
 	doc = Document.from_file(writable_filename)
-	assert 'Hello World' in doc.data
+	assert 'Hello World' in doc.start_part.dump()
 
 def test_read_table(table_data, writable_filename):
 	doc = Document()
 	t = doc.table(table_data)
 	doc.save(writable_filename)
 	doc = Document.from_file(writable_filename)
-	assert 'Christian' in doc.data
+	assert 'Christian' in doc.start_part.dump()

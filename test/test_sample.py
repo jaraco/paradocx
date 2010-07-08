@@ -25,6 +25,9 @@ def test_start_part(sample_stream):
 	assert pkg.start_part.name == '/word/document.xml'
 	assert pkg.start_part.name in pkg
 
+def test_create_empty_styles():
+	part = StylesPart(None)
+
 def test_styles(sample_stream):
 	pkg = WordPackage.from_stream(sample_stream)
 	styles_path = posixpath.join('/word', 'styles.xml')

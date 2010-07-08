@@ -13,6 +13,16 @@ docx_namespaces = {
 }
 docx_namespaces.update(ooxml_namespaces)
 
+def expand_namespace(tag):
+	"""
+	>>> expand_namespace('w:document')
+	'{http://schemas.openxmlformats.org/wordprocessingml/2006/main}document'
+	"""
+	namespace, sep, tag = tag.rpartition(':')
+	fmt = '{%(namespace)s}%(tag)s' if namespace else '%(tag)s'
+	namespace = docx_namespaces[namespace]
+	return fmt % vars()
+
 class ElementMaker(builder.ElementMaker):
 	def __getitem__(self, name):
 		return "%s%s" % (self._namespace, name)

@@ -1,7 +1,7 @@
 from openpack.basepack import Part
 from openpack.officepack import OfficePackage
-from lxml.etree import tostring
-from util import w
+from lxml.etree import tostring, fromstring
+from util import w, expand_namespace as EN
 
 class DocumentPart(Part):
 	content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
@@ -9,16 +9,16 @@ class DocumentPart(Part):
 
 	def __init__(self, *args, **kwargs):
 		Part.__init__(self, *args, **kwargs)
-		self.xml = w.document()
+		self.data = w.document()
 		self.body = w.body()
-		self.xml.append(self.body)
+		self.data.append(self.body)
+		if 'data' in kwargs:
+			self.load(kwargs['data'])
 
-	def dump(self):
-		if len(self.body):
-			t = tostring(self.xml, encoding='utf-8', pretty_print=True)
-			return t
-		return Part.dump(self)
-	
+	def load(self, xml):
+		self.data = fromstring(xml)
+		self.body = self.data.find(EN('w:body'))
+
 	def append(self, xml_element):
 		self.body.append(xml_element)
 

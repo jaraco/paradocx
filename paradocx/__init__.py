@@ -16,10 +16,6 @@ class Document(WordPackage):
 	def paragraphs(self):
 		return self.start_part.body.findall(w['p'])
 
-	@property
-	def data(self):
-		return self.start_part.data
-
 def run(text=None, bold=False, italic=False, font=None):
 	rPr = w.rPr()
 	if bold:

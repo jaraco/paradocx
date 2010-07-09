@@ -1,10 +1,11 @@
 from openpack.basepack import ContentType, Part, Relationship
 from openpack.officepack import OfficePackage
-from openpack.util import handle
-from document import DocumentPart
-from numbering import NumberingPart
-from styles import StylesPart
-from headerfooter import HeaderPart, FooterPart
+
+# these modules must be imported for their Parts to be properly recognized
+import document
+import numbering
+import styles
+import headerfooter
 
 class WordPackage(OfficePackage):
 	def __init__(self):
@@ -32,7 +33,7 @@ class WordPackage(OfficePackage):
 				"rels",
 			)
 		)
-		start = DocumentPart(self, '/word/document.xml')
+		start = document.DocumentPart(self, '/word/document.xml')
 		self.content_types.add(
 			ContentType.Override(
 				start.content_type,
@@ -41,22 +42,6 @@ class WordPackage(OfficePackage):
 		)
 		self[start.name] = start
 		self.relate(start)
-
-	@handle(OfficePackage.main_rel)
-	def _load_word_doc(self, name, data):
-		self[name] = DocumentPart(self, name, data=data)
-
-	@handle(StylesPart.rel_type)
-	def _load_styles(self, name, data):
-		self[name] = StylesPart(self, name, data=data)
-
-	@handle(HeaderPart.rel_type)
-	def _load_header(self, name, data):
-		self[name] = HeaderPart(self, name, data=data)
-	
-	@handle(FooterPart.rel_type)
-	def _load_footer(self, name, data):
-		self[name] = FooterPart(self, name, data=data)
 
 if __name__ == '__main__':
 	import sys

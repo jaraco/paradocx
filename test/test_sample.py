@@ -50,6 +50,14 @@ def test_style_class(sample_stream):
 	style_names = [style.name for style in styles]
 	assert len(set(style_names)) == len(styles)
 
+def test_replace_style_id(sample_stream):
+	pkg = WordPackage.from_stream(sample_stream)
+	styles_part = pkg['/word/styles.xml']
+	styles_part.replace_style_id('DefaultParagraphFont', 'NewId')
+	# header char is based on the default paragraph font
+	header_char = styles_part.get_style_by_id('HeaderChar')
+	assert header_char.based_on_id == 'NewId'
+
 def test_replace_styles_by_name(sample_stream):
 	pkg = WordPackage.from_stream(sample_stream)
 	orig_styles_part = pkg['/word/styles.xml']

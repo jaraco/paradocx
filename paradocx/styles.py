@@ -67,7 +67,7 @@ class Style(etree.ElementBase):
 
 	def _get_based_on_id(self):
 		node = self.find(STYLES+'basedOn')
-		if node:
+		if node is not None:
 			return node.attrib[STYLES+'val']
 	def _set_based_on_id(self, id):
 		self.find(STYLES+'basedOn').attrib[STYLES+'val'] = id
@@ -75,7 +75,7 @@ class Style(etree.ElementBase):
 
 	def _get_next_id(self):
 		node = self.find(STYLES+'next')
-		if node:
+		if node is not None:
 			return node.attrib[STYLES+'val']
 	def _set_next_id(self, id):
 		self.find(STYLES+'next').attrib[STYLES+'val'] = id

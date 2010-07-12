@@ -1,8 +1,9 @@
 from lxml import etree
 
 from openpack.basepack import DefaultNamed, Part
+from .util import docx_namespaces
 
-style_ns = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+style_ns = docx_namespaces['w']
 STYLES = '{%s}' % style_ns
 
 class StylesPart(DefaultNamed, Part):
@@ -23,6 +24,16 @@ class StylesPart(DefaultNamed, Part):
 		return self._data.findall(STYLES+'style')
 
 	
+	def replace_style_id(self, orig, repl):
+		# replace all instances of a style id with another
+		for style in self.get_styles():
+			if style.id == orig:
+				style.id = repl
+			if style.based_on_id == orig:
+				style.based_on_id = repl
+			if style.next_id == orig:
+				style.next_id = repl
+		
 
 	def replace_styles(self, other):
 		"""
@@ -32,7 +43,10 @@ class StylesPart(DefaultNamed, Part):
 		"""
 		self_style_ids = dict((style.name, style.id) for style in self.get_styles())
 		for style in other.get_styles():
-			style.id = self_style_ids.get(style.name, style.id)
+			if style.name in self_style_ids:
+				orig_style_id = style.id
+				repl_style_id = self_style_ids[style.name]
+				other.replace_style_id(orig_style_id, repl_style_id)
 		self._data = other._data
 		# todo: make sure there are no duplicate IDs
 
@@ -50,3 +64,20 @@ class Style(etree.ElementBase):
 	@property
 	def name(self):
 		return self.find(STYLES+'name').attrib[STYLES+'val']
+
+	def _get_based_on_id(self):
+		node = self.find(STYLES+'basedOn')
+		if node:
+			return node.attrib[STYLES+'val']
+	def _set_based_on_id(self, id):
+		self.find(STYLES+'basedOn').attrib[STYLES+'val'] = id
+	based_on_id = property(_get_based_on_id, _set_based_on_id)
+
+	def _get_next_id(self):
+		node = self.find(STYLES+'next')
+		if node:
+			return node.attrib[STYLES+'val']
+	def _set_next_id(self, id):
+		self.find(STYLES+'next').attrib[STYLES+'val'] = id
+	next_id = property(_get_next_id, _set_next_id)
+	

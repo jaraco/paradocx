@@ -7,8 +7,8 @@ class Document(WordPackage):
 		self.start_part.append(p)
 		return p
 
-	def table(self, data=None):
-		tbl = table(data)
+	def table(self, data=None, style=None):
+		tbl = table(data, style=style)
 		self.start_part.append(tbl)
 		return tbl
 
@@ -60,8 +60,10 @@ def paragraph(text=None, style=None, pagebreak=None):
 	p.extend(subs)
 	return p
 
-def table(data=None):
+def table(data=None, style=None):
 	tbl = w.tbl()
+	tblPr = w.tblPr()
+	tbl.append(tblPr)
 	data = data or []
 	for cells in data:
 		tbl.append(
@@ -69,6 +71,10 @@ def table(data=None):
 				*[w.tc(paragraph(value)) for value in cells]
 			)
 		)
+	if style:
+		s = w.tblStyle()
+		s.attrib[w['val']] = style
+		tblPr.append(s)
 	return tbl
 	
 

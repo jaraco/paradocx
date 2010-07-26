@@ -2,10 +2,10 @@ from setuptools import setup
 
 setup(
     name="paradocx",
-    version="0.3-dev",
+    version="0.3",
     packages=['paradocx'],
-	install_requires=[
-		'openpack >= 0.4dev',
-	],
+    install_requires=[
+        'openpack >= 0.4',
+    ],
 )
 

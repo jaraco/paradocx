@@ -1,9 +1,18 @@
 from openpack.basepack import DefaultNamed, Part
 import mimetypes
+import warnings
 
 class ImagePart(DefaultNamed, Part):
 	rel_type = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image'
 	default_name = '/word/media/image.jpeg'
+
+	"""
+	ECMA-376 3nd Edition Part 1 Page 170 states:
+	A producer that wants interoperability should use one of the following standard formats:
+		- image/png ISO/IEC 15948:2003, http://www.libpng.org/pub/png/spec/
+		- image/jpeg, http://www.w3.org/Graphics/JPEG
+	"""
+	interoperability_types = ['image/png', 'image/jpeg']
 
 	def _set_name(self, name):
 		super(ImagePart, self)._set_name(name)
@@ -21,3 +30,5 @@ class ImagePart(DefaultNamed, Part):
 		ct, _ = mimetypes.guess_type(name)
 		if ct and not self.content_type:
 			self.content_type = ct
+			if not ct in self.interoperability_types:
+				warnings.warn("Image type %s is not guaranteed to be interoperable" % ct)

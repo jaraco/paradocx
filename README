@@ -1,0 +1,21 @@
+Paradocx
+========
+
+.. contents::
+
+Status and License
+------------------
+
+``paradocx`` builds on the Open Office XML Spec provided by openpack to
+provide interfaces for working with Microsoft Word documents in the
+Office 2007 'docx' format.
+
+``paradocx`` is Copyright (c) 2010 by YouGov Plc. and licensed under
+`this license
+<http://bitbucket.org/yougov/paradocx/raw/tip/LICENSE>`_.
+
+Changes
+-------
+
+For the list of changes, see `CHANGES in the repository
+<http://bitbucket.org/yougov/paradocx/src/tip/CHANGES>`_.

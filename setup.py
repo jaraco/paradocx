@@ -5,11 +5,14 @@ with open(os.path.join(os.path.dirname(__file__), 'README')) as f:
 
 setup_params = dict(
     name="paradocx",
-    version="0.3.2",
+    use_hg_version=True,
     packages=['paradocx'],
     long_description=long_description,
     install_requires=[
-        'openpack >= 0.4',
+        'openpack>=1.0',
+    ],
+    setup_requires=[
+        'hgtools>=1.0',
     ],
 )
 

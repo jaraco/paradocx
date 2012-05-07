@@ -1,3 +1,4 @@
+#!/bin/bash -e
 virtualenv env
 
 env/bin/python setup.py develop

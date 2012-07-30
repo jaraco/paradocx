@@ -11,8 +11,12 @@ setup_params = dict(
     install_requires=[
         'openpack>=1.0',
     ],
+    tests_require=[
+        'pytest',
+    ],
     setup_requires=[
         'hgtools>=1.0',
+        'pytest-runner',
     ],
 )
 

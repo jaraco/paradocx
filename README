@@ -84,6 +84,75 @@ See `the source
 <https://bitbucket.org/yougov/paradocx/src/66c96e2251e6/paradocx/package.py?at=default>`_
 for a trivial example of usage.
 
+Each `WordPackage` is a container of a number of related parts. The parts
+represent the various aspects of a document. The following example, adapted
+from real-world usage, shows how
+one might construct a more complex structure from a series of XML templates
+on the file system::
+
+    import string
+
+    def load_template(name, **params):
+        with open(name) as f:
+            template = string.Template(f.read())
+        return template.substitute(params)
+
+    doc = WordPackage()
+    doc.start_part.data = load_template('document.xml', text="Hello world")
+
+    # styles
+    styles = StylesPart(doc)
+    doc.add(styles)
+    styles.data = load_template('styles.xml')
+    doc.start_part.relate(styles)
+
+    title = "My initial document"
+
+    # Header for cover page
+    cover_header = HeaderPart(doc, '/word/cover-header.xml')
+    doc.add(cover_header)
+    cover_header.data = load_template('cover-header.xml', title=title)
+    doc.start_part.relate(cover_header, 'PmxHdr0')
+
+    # body header
+    header = HeaderPart(doc)
+    doc.add(header)
+    header.data = load_template('header.xml', title=title)
+    doc.start_part.relate(header, 'PmxHdr1')
+
+    # body footer
+    footer = FooterPart(doc)
+    doc.add(footer)
+    footer.data = load_template('footer.xml',
+        date=unicode(datetime.datetime.now()))
+    doc.start_part.relate(footer, 'PmxFtr1')
+
+    # image1
+    image1 = ImagePart(doc, '/word/media/logo.png')
+    doc.add(image1, override=False)
+    with open('my_logo.png', 'rb') as logo_data:
+        image1.data = logo_data.read()
+    doc.start_part.relate(image1, 'Logo1')
+    header.relate(image1, 'Logo1')
+    # cover page uses the logo, so relate it
+    cover_header.relate(image1, 'Logo1')
+
+    # settings
+    settings = SettingsPart(doc)
+    doc.add(settings)
+    settings.data = load_template('settings.xml')
+    doc.start_part.relate(settings)
+
+    doc.save(...)
+
+For more details on constructing the XML data for the underlying parts,
+consider using a reference document and the OpenPack tools for inspecting
+the document for the necessary elements, or consider reading some of the
+resources at the `Microsoft Dev Center
+<http://msdn.microsoft.com/en-us/library/office/aa338205%28v=office.12%29.aspx>`_
+or read up on the `standards developed around Office Open XML
+<http://en.wikipedia.org/wiki/Office_Open_XML>`_.
+
 Testing
 -------
 

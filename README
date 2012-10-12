@@ -72,6 +72,20 @@ One may also append tables to a document::
     <Element {http://schemas.openxmlformats.org/wordprocessingml/2006/main}tbl at 0x2231240>
     >>> doc.save('data.docx')
 
+
+Object Model and Advanced Usage
+-------------------------------
+
+The core object for a Word document is the `paradocx.package.WordPackage`. All
+operations involving constructing a Word document use some form of this class
+(the `paradocx.Document` subclasses `WordPackage`).
+
+See `the source
+<https://bitbucket.org/yougov/paradocx/src/66c96e2251e6/paradocx/package.py?at=default>`_
+for a trivial example of usage.
+
+
+
 Changes
 -------
 

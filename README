@@ -14,6 +14,31 @@ Office 2007 'docx' format.
 `this license
 <http://bitbucket.org/yougov/paradocx/raw/tip/LICENSE>`_.
 
+Introduction
+------------
+
+Constructing simple documents using Paradocx is fairly straightforward::
+
+    >>> import paradocx
+    >>> doc = paradocx.Document()
+    >>> doc.paragraph('Things to do', style='Heading 1')
+    <Element {http://schemas.openxmlformats.org/wordprocessingml/2006/main}p at 0x22a1240>
+    >>> doc.paragraph('First, spend some time learning paradocx usage.')
+    <Element {http://schemas.openxmlformats.org/wordprocessingml/2006/main}p at 0x22a12d0>
+    >>> doc.paragraph('Then, put together some examples')
+    <Element {http://schemas.openxmlformats.org/wordprocessingml/2006/main}p at 0x22a1240>
+    >>> doc.paragraph('Finally, put those examples in the paradocx documentation')
+    <Element {http://schemas.openxmlformats.org/wordprocessingml/2006/main}p at 0x22a12d0>
+    >>> doc.save('mydoc.docx')
+
+You can also append tables to the document::
+
+    >>> import paradocx
+    >>> doc = paradocx.Document()
+    >>> doc.table([['a', 'b', 'c'], ['1', '2', '3']])
+    <Element {http://schemas.openxmlformats.org/wordprocessingml/2006/main}tbl at 0x2231240>
+    >>> doc.save('data.docx')
+
 Changes
 -------
 

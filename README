@@ -84,6 +84,14 @@ See `the source
 <https://bitbucket.org/yougov/paradocx/src/66c96e2251e6/paradocx/package.py?at=default>`_
 for a trivial example of usage.
 
+Testing
+-------
+
+Paradocx uses `pytest-runner <http://bitbucket.org/jaraco/pytest-runner>`_ for
+running the tests. To test, simply invoke::
+
+    python setup.py ptr
+
 Changes
 -------
 

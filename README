@@ -31,7 +31,40 @@ Constructing simple documents using Paradocx is fairly straightforward::
     <Element {http://schemas.openxmlformats.org/wordprocessingml/2006/main}p at 0x22a12d0>
     >>> doc.save('mydoc.docx')
 
-You can also append tables to the document::
+Using `part-edit` from `Openpack <http://bitbucket.org/yougov/openpack>`_,
+one can see the document that was constructed::
+
+    > EDITOR=cat part-edit mydoc.docx/word/document.xml
+    <w:document xmlns:dcterms="http://purl.org/dc/terms/" xmlns:ve="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <w:body>
+        <w:p>
+          <w:pPr>
+            <w:pStyle w:val="Heading 1"/>
+          </w:pPr>
+          <w:r>
+            <w:t>Things to do</w:t>
+          </w:r>
+        </w:p>
+        <w:p>
+          <w:r>
+            <w:t>First, spend some time learning paradocx usage.</w:t>
+          </w:r>
+        </w:p>
+        <w:p>
+          <w:r>
+            <w:t>Then, put together some examples</w:t>
+          </w:r>
+        </w:p>
+        <w:p>
+          <w:r>
+            <w:t>Finally, put those examples in the paradocx documentation</w:t>
+          </w:r>
+        </w:p>
+      </w:body>
+    </w:document>
+
+
+One may also append tables to a document::
 
     >>> import paradocx
     >>> doc = paradocx.Document()

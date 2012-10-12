@@ -3,6 +3,8 @@ import importlib
 from openpack.basepack import ContentType
 from openpack.officepack import OfficePackage
 
+from . import document
+
 def initialize():
 	"""
 	Import various modules so their Part classes are present.

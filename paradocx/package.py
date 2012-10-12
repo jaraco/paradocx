@@ -1,11 +1,16 @@
+import importlib
+
 from openpack.basepack import ContentType
 from openpack.officepack import OfficePackage
 
-# these modules must be imported for their Parts to be properly recognized
-import document
-import numbering
-import styles
-import headerfooter
+def initialize():
+	"""
+	Import various modules so their Part classes are present.
+	"""
+	for mod in 'document numbering styles headerfooter'.split():
+		importlib.import_module('paradocx.' + mod)
+
+initialize()
 
 class WordPackage(OfficePackage):
 	def __init__(self):

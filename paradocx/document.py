@@ -1,7 +1,8 @@
+from lxml.etree import fromstring
 from openpack.basepack import Part
 from openpack.officepack import OfficePackage
-from lxml.etree import tostring, fromstring
-from util import w, expand_namespace as EN
+
+from .util import w, expand_namespace as EN
 
 class DocumentPart(Part):
 	content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
@@ -21,4 +22,3 @@ class DocumentPart(Part):
 
 	def append(self, xml_element):
 		self.body.append(xml_element)
-

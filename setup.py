@@ -20,6 +20,7 @@ setup_params = dict(
     ],
     install_requires=[
         'openpack>=1.1,<2dev',
+        'six',
     ] + importlib_req,
     tests_require=[
         'pytest',

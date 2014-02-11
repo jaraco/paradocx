@@ -1,3 +1,5 @@
+import six
+
 from paradocx.util import w
 from paradocx.package import WordPackage
 
@@ -30,7 +32,7 @@ def run(text=None, bold=False, italic=False, font=None):
 	if len(rPr):
 		r.append(rPr)
 	if text:
-		r.append(w.t(unicode(text)))
+		r.append(w.t(six.text_type(text)))
 	return r
 
 def paragraph(text=None, style=None, pagebreak=None):
@@ -48,8 +50,8 @@ def paragraph(text=None, style=None, pagebreak=None):
 	if len(pPr):
 		subs.append(pPr)
 	if text:
-		if isinstance(text, basestring):
-			text = unicode(text)
+		if isinstance(text, six.string_types):
+			text = six.text_type(text)
 			subs.append(
 				w.r(
 					w.t(text)

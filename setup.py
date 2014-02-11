@@ -19,7 +19,7 @@ setup_params = dict(
         "Programming Language :: Python :: 2.7",
     ],
     install_requires=[
-        'openpack>=1.0',
+        'openpack>=1.1,<2dev',
     ] + importlib_req,
     tests_require=[
         'pytest',

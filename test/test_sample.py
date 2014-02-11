@@ -1,5 +1,6 @@
 """Test the sample.docx provided by ooxmldeveloper.org."""
 
+import os
 import posixpath
 import random
 import hashlib
@@ -64,8 +65,8 @@ def test_replace_styles_by_name(sample_stream):
 	new_styles_part = StylesPart(None, '/who/cares', data=orig_styles_part.dump())
 	# change an id in the "new" styles
 	style = random.choice(new_styles_part.get_styles())
-	random_string = ''.join(map(chr, (random.randint(0,255) for c in range(100))))
-	new_id = hashlib.md5(random_string).hexdigest()
+	random_bytes = os.urandom(100)
+	new_id = hashlib.md5(random_bytes).hexdigest()
 	orig_style_id, style.id = style.id, new_id
 	style_name = style.name
 	# tag the element, so we're sure it gets copied to the orig styles
@@ -74,4 +75,4 @@ def test_replace_styles_by_name(sample_stream):
 	assert new_id not in (style.id for style in orig_styles_part.get_styles())
 	assert style_name in (style.name for style in orig_styles_part.get_styles())
 	style = orig_styles_part.get_style_by_id(orig_style_id)
-	assert 'test-replace-styles' in orig_styles_part.dump()
+	assert b'test-replace-styles' in orig_styles_part.dump()

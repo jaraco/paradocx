@@ -1,6 +1,6 @@
 """Test the sample.docx provided by ooxmldeveloper.org."""
 
-from StringIO import StringIO
+import io
 
 from paradocx import Document, w
 from paradocx.styles import StylesPart
@@ -17,7 +17,7 @@ def test_add_table(table_data):
 
 def test_save():
 	doc = Document()
-	stream = StringIO()
+	stream = io.BytesIO()
 	doc._store(stream)
 	assert stream.tell() > 0
 

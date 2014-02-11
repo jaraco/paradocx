@@ -64,7 +64,7 @@ def test_replace_styles_by_name(sample_stream):
 	new_styles_part = StylesPart(None, '/who/cares', data=orig_styles_part.dump())
 	# change an id in the "new" styles
 	style = random.choice(new_styles_part.get_styles())
-	random_string = ''.join(map(chr, (random.randint(0,255) for c in xrange(100))))
+	random_string = ''.join(map(chr, (random.randint(0,255) for c in range(100))))
 	new_id = hashlib.md5(random_string).hexdigest()
 	orig_style_id, style.id = style.id, new_id
 	style_name = style.name

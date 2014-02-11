@@ -76,5 +76,5 @@ def table(data=None, style=None):
 		s.attrib[w['val']] = style
 		tblPr.append(s)
 	return tbl
-	
+
 

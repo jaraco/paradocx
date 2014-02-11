@@ -11,6 +11,13 @@ setup_params = dict(
     use_hg_version=True,
     packages=['paradocx'],
     long_description=long_description,
+    license = 'MIT',
+    classifiers = [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 2.6",
+        "Programming Language :: Python :: 2.7",
+    ],
     install_requires=[
         'openpack>=1.0',
     ] + importlib_req,

@@ -1,10 +1,15 @@
+1.2
+===
+
+Refresh package. Move hosting to Github.
+
 1.1
-~~~
+===
 
 Added Python 3 support.
 
 1.0
-~~~
+===
 
 As YouGov is adopting many of the principles of semver, and openpack is
 stable for many months, we're declaring it suitable for a 1.0 release.

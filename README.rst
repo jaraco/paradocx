@@ -3,8 +3,8 @@
 
 .. image:: https://img.shields.io/pypi/pyversions/paradocx.svg
 
-.. image:: https://img.shields.io/travis/jaraco/paradocx/master.svg
-   :target: https://travis-ci.org/jaraco/paradocx
+.. image:: https://img.shields.io/travis/yougov/paradocx/master.svg
+   :target: https://travis-ci.org/yougov/paradocx
 
 .. image:: https://readthedocs.org/projects/paradocx/badge/?version=latest
    :target: https://paradocx.readthedocs.io/en/latest/?badge=latest

@@ -1,37 +1,65 @@
-import os
-import sys
+#!/usr/bin/env python
 
-with open(os.path.join(os.path.dirname(__file__), 'README')) as f:
-    long_description = f.read()
+# Project skeleton maintained at https://github.com/jaraco/skeleton
 
-importlib_req = ['importlib'] if sys.version_info < (2,7) else []
+import io
 
-setup_params = dict(
-    name="paradocx",
-    use_hg_version=True,
-    packages=['paradocx'],
-    long_description=long_description,
-    license = 'MIT',
-    classifiers = [
-        "Development Status :: 5 - Production/Stable",
-        "Intended Audience :: Developers",
-        "Programming Language :: Python :: 2.6",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3",
-    ],
-    install_requires=[
-        'openpack>=1.1,<2dev',
-        'six',
-    ] + importlib_req,
-    tests_require=[
-        'pytest',
-    ],
-    setup_requires=[
-        'hgtools>=1.0',
-        'pytest-runner',
-    ],
+import setuptools
+
+with io.open('README.rst', encoding='utf-8') as readme:
+	long_description = readme.read()
+
+name = 'paradocx'
+description = ''
+nspkg_technique = 'native'
+"""
+Does this package use "native" namespace packages or
+pkg_resources "managed" namespace packages?
+"""
+
+params = dict(
+	name=name,
+	use_scm_version=True,
+	author="Jason R. Coombs",
+	author_email="jaraco@jaraco.com",
+	description=description or name,
+	long_description=long_description,
+	url="https://github.com/jaraco/" + name,
+	packages=setuptools.find_packages(),
+	include_package_data=True,
+	namespace_packages=(
+		name.split('.')[:-1] if nspkg_technique == 'managed'
+		else []
+	),
+	python_requires='>=2.7',
+	install_requires=[
+		'openpack>=1.1,<2dev',
+		'six',
+	],
+	extras_require={
+		'testing': [
+			'pytest>=2.8',
+			'pytest-sugar>=0.9.1',
+			'collective.checkdocs',
+		],
+		'docs': [
+			'sphinx',
+			'jaraco.packaging>=3.2',
+			'rst.linker>=1.9',
+		],
+	},
+	setup_requires=[
+		'setuptools_scm>=1.15.0',
+	],
+	classifiers=[
+		"Development Status :: 5 - Production/Stable",
+		"Intended Audience :: Developers",
+		"License :: OSI Approved :: MIT License",
+		"Programming Language :: Python :: 2.7",
+		"Programming Language :: Python :: 3",
+	],
+	entry_points={
+	},
 )
-
 if __name__ == '__main__':
-    from setuptools import setup
-    setup(**setup_params)
+	setuptools.setup(**params)

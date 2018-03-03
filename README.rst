@@ -1,7 +1,13 @@
-Paradocx
-========
+.. image:: https://img.shields.io/pypi/v/paradocx.svg
+   :target: https://pypi.org/project/paradocx
 
-.. contents::
+.. image:: https://img.shields.io/pypi/pyversions/paradocx.svg
+
+.. image:: https://img.shields.io/travis/jaraco/paradocx/master.svg
+   :target: https://travis-ci.org/jaraco/paradocx
+
+.. image:: https://readthedocs.org/projects/paradocx/badge/?version=latest
+   :target: https://paradocx.readthedocs.io/en/latest/?badge=latest
 
 Status and License
 ------------------

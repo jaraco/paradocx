@@ -5,20 +5,21 @@ import posixpath
 import random
 import hashlib
 
-import py.test
-
 from paradocx.package import WordPackage
 from paradocx.document import DocumentPart
 from paradocx.styles import StylesPart, Style
 from paradocx.util import dcterms
 
+
 def test_open(sample_stream):
 	pkg = WordPackage.from_stream(sample_stream)
 	assert not hasattr(pkg, 'filename')
 
+
 def test_open_file(sample_filename):
 	pkg = WordPackage.from_file(sample_filename)
 	assert pkg.filename == sample_filename
+
 
 def test_start_part(sample_stream):
 	pkg = WordPackage.from_stream(sample_stream)
@@ -26,8 +27,10 @@ def test_start_part(sample_stream):
 	assert pkg.start_part.name == '/word/document.xml'
 	assert pkg.start_part.name in pkg
 
+
 def test_create_empty_styles():
-	part = StylesPart(None)
+	StylesPart(None)
+
 
 def test_styles(sample_stream):
 	pkg = WordPackage.from_stream(sample_stream)
@@ -36,10 +39,12 @@ def test_styles(sample_stream):
 	srel = pkg.start_part.related(StylesPart.rel_type)[0]
 	assert srel == pkg[styles_path]
 
+
 def test_core_props(sample_stream):
 	pkg = WordPackage.from_stream(sample_stream)
 	assert pkg.core_properties
 	assert id(pkg.core_properties.element.find(dcterms['modified']))
+
 
 def test_style_class(sample_stream):
 	pkg = WordPackage.from_stream(sample_stream)
@@ -51,6 +56,7 @@ def test_style_class(sample_stream):
 	style_names = [style.name for style in styles]
 	assert len(set(style_names)) == len(styles)
 
+
 def test_replace_style_id(sample_stream):
 	pkg = WordPackage.from_stream(sample_stream)
 	styles_part = pkg['/word/styles.xml']
@@ -58,6 +64,7 @@ def test_replace_style_id(sample_stream):
 	# header char is based on the default paragraph font
 	header_char = styles_part.get_style_by_id('HeaderChar')
 	assert header_char.based_on_id == 'NewId'
+
 
 def test_replace_styles_by_name(sample_stream):
 	pkg = WordPackage.from_stream(sample_stream)

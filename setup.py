@@ -41,6 +41,7 @@ params = dict(
 			'pytest>=2.8',
 			'pytest-sugar>=0.9.1',
 			'collective.checkdocs',
+			'pytest-flake8',
 		],
 		'docs': [
 			'sphinx',

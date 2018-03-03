@@ -1,5 +1,5 @@
-Welcome to skeleton documentation!
-========================================
+Welcome to paradocx documentation!
+==================================
 
 .. toctree::
    :maxdepth: 1
@@ -7,7 +7,17 @@ Welcome to skeleton documentation!
    history
 
 
-.. automodule:: skeleton
+.. automodule:: paradocx
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: paradocx.document
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: paradocx.styles
     :members:
     :undoc-members:
     :show-inheritance:

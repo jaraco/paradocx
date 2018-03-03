@@ -16,7 +16,7 @@ class NumberingPart(DefaultNamed, Part):
 class AbstractNumbering(object):
 	def __init__(self, id, **props):
 		self.id = id
-		self.properties = properties
+		self.properties = props
 
 
 class Numbering(object):

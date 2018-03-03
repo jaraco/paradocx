@@ -9,19 +9,17 @@
 .. image:: https://readthedocs.org/projects/paradocx/badge/?version=latest
    :target: https://paradocx.readthedocs.io/en/latest/?badge=latest
 
-Status and License
-------------------
+Status
+======
 
 ``paradocx`` builds on the Open Office XML Spec provided by openpack to
 provide interfaces for working with Microsoft Word documents in the
 Office 2007 'docx' format.
 
-``paradocx`` is Copyright (c) 2010 by YouGov Plc. and licensed under
-`this license
-<http://bitbucket.org/yougov/paradocx/raw/tip/LICENSE>`_.
+``paradocx`` is Copyright (c) 2010 by YouGov Plc.
 
 Introduction
-------------
+============
 
 Constructing simple documents using Paradocx is fairly straightforward::
 
@@ -37,7 +35,7 @@ Constructing simple documents using Paradocx is fairly straightforward::
     <Element {http://schemas.openxmlformats.org/wordprocessingml/2006/main}p at 0x22a12d0>
     >>> doc.save('mydoc.docx')
 
-Using `part-edit` from `Openpack <http://bitbucket.org/yougov/openpack>`_,
+Using `part-edit` from `Openpack <https://pypi.org/project/openpack>`_,
 one can see the document that was constructed::
 
     > EDITOR=cat part-edit mydoc.docx/word/document.xml
@@ -80,7 +78,7 @@ One may also append tables to a document::
 
 
 Object Model and Advanced Usage
--------------------------------
+===============================
 
 The core object for a Word document is the `paradocx.package.WordPackage`. All
 operations involving constructing a Word document use some form of this class
@@ -160,15 +158,7 @@ or read up on the `standards developed around Office Open XML
 <http://en.wikipedia.org/wiki/Office_Open_XML>`_.
 
 Testing
--------
+=======
 
-Paradocx uses `pytest-runner <http://bitbucket.org/jaraco/pytest-runner>`_ for
-running the tests. To test, simply invoke::
-
-    python setup.py ptr
-
-Changes
--------
-
-For the list of changes, see `CHANGES in the repository
-<http://bitbucket.org/yougov/paradocx/src/tip/CHANGES>`_.
+Paradocx uses `tox <https://pypi.org/project/tox>`_ for
+running the tests. To test, simply invoke ``tox`` on the repo.

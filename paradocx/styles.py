@@ -6,9 +6,15 @@ from .util import docx_namespaces
 style_ns = docx_namespaces['w']
 STYLES = '{%s}' % style_ns
 
+
 class StylesPart(DefaultNamed, Part):
-	content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"
-	rel_type = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles"
+	content_type = (
+		"application/"
+		"vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"
+	)
+	rel_type = (
+		"http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles"
+	)
 	default_name = '/word/styles.xml'
 
 	def load(self, xml):
@@ -21,9 +27,8 @@ class StylesPart(DefaultNamed, Part):
 	data = property(lambda self: self._data, load)
 
 	def get_styles(self):
-		return self._data.findall(STYLES+'style')
+		return self._data.findall(STYLES + 'style')
 
-	
 	def replace_style_id(self, orig, repl):
 		# replace all instances of a style id with another
 		for style in self.get_styles():
@@ -33,7 +38,6 @@ class StylesPart(DefaultNamed, Part):
 				style.based_on_id = repl
 			if style.next_id == orig:
 				style.next_id = repl
-		
 
 	def replace_styles(self, other):
 		"""
@@ -54,30 +58,33 @@ class StylesPart(DefaultNamed, Part):
 		styles = dict((style.id, style) for style in self.get_styles())
 		return styles[id]
 
+
 class Style(etree.ElementBase):
 	def _get_id(self):
-		return self.attrib[STYLES+'styleId']
+		return self.attrib[STYLES + 'styleId']
+
 	def _set_id(self, id):
-		self.attrib[STYLES+'styleId'] = id
+		self.attrib[STYLES + 'styleId'] = id
 	id = property(_get_id, _set_id)
 
 	@property
 	def name(self):
-		return self.find(STYLES+'name').attrib[STYLES+'val']
+		return self.find(STYLES + 'name').attrib[STYLES + 'val']
 
 	def _get_based_on_id(self):
-		node = self.find(STYLES+'basedOn')
+		node = self.find(STYLES + 'basedOn')
 		if node is not None:
-			return node.attrib[STYLES+'val']
+			return node.attrib[STYLES + 'val']
+
 	def _set_based_on_id(self, id):
-		self.find(STYLES+'basedOn').attrib[STYLES+'val'] = id
+		self.find(STYLES + 'basedOn').attrib[STYLES + 'val'] = id
 	based_on_id = property(_get_based_on_id, _set_based_on_id)
 
 	def _get_next_id(self):
-		node = self.find(STYLES+'next')
+		node = self.find(STYLES + 'next')
 		if node is not None:
-			return node.attrib[STYLES+'val']
+			return node.attrib[STYLES + 'val']
+
 	def _set_next_id(self, id):
-		self.find(STYLES+'next').attrib[STYLES+'val'] = id
+		self.find(STYLES + 'next').attrib[STYLES + 'val'] = id
 	next_id = property(_get_next_id, _set_next_id)
-	

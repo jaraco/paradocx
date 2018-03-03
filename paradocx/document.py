@@ -4,8 +4,12 @@ from openpack.officepack import OfficePackage
 
 from .util import w, expand_namespace as EN
 
+
 class DocumentPart(Part):
-	content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
+	content_type = (
+		"application/"
+		"vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
+	)
 	rel_type = OfficePackage.main_rel
 
 	def __init__(self, *args, **kwargs):

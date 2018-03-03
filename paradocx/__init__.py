@@ -3,6 +3,7 @@ import six
 from paradocx.util import w
 from paradocx.package import WordPackage
 
+
 class Document(WordPackage):
 	def paragraph(self, text=None, style=None):
 		p = paragraph(text, style=style)
@@ -17,6 +18,7 @@ class Document(WordPackage):
 	@property
 	def paragraphs(self):
 		return self.start_part.body.findall(w['p'])
+
 
 def run(text=None, bold=False, italic=False, font=None):
 	rPr = w.rPr()
@@ -34,6 +36,7 @@ def run(text=None, bold=False, italic=False, font=None):
 	if text:
 		r.append(w.t(six.text_type(text)))
 	return r
+
 
 def paragraph(text=None, style=None, pagebreak=None):
 	p = w.p()
@@ -62,6 +65,7 @@ def paragraph(text=None, style=None, pagebreak=None):
 	p.extend(subs)
 	return p
 
+
 def table(data=None, style=None):
 	tbl = w.tbl()
 	tblPr = w.tblPr()
@@ -78,5 +82,3 @@ def table(data=None, style=None):
 		s.attrib[w['val']] = style
 		tblPr.append(s)
 	return tbl
-
-

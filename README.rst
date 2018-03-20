@@ -9,14 +9,9 @@
 .. image:: https://readthedocs.org/projects/paradocx/badge/?version=latest
    :target: https://paradocx.readthedocs.io/en/latest/?badge=latest
 
-Status
-======
-
 ``paradocx`` builds on the Open Office XML Spec provided by openpack to
 provide interfaces for working with Microsoft Word documents in the
 Office 2007 'docx' format.
-
-``paradocx`` is Copyright (c) 2010 by YouGov Plc.
 
 Introduction
 ============
@@ -85,7 +80,7 @@ operations involving constructing a Word document use some form of this class
 (the `paradocx.Document` subclasses `WordPackage`).
 
 See `the source
-<https://bitbucket.org/yougov/paradocx/src/66c96e2251e6/paradocx/package.py?at=default>`_
+<https://github.com/yougov/paradocx/blob/master/paradocx/package.py>`_
 for a trivial example of usage.
 
 Each `WordPackage` is a container of a number of related parts. The parts

@@ -1,7 +1,7 @@
-.. image:: https://img.shields.io/pypi/v/skeleton.svg
+.. image:: https://img.shields.io/pypi/v/paradocx.svg
    :target: `PyPI link`_
 
-.. image:: https://img.shields.io/pypi/pyversions/skeleton.svg
+.. image:: https://img.shields.io/pypi/pyversions/paradocx.svg
    :target: `PyPI link`_
 
 .. _PyPI link: https://pypi.org/project/paradocx

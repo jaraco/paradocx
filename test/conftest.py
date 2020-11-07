@@ -13,21 +13,21 @@ def get_resource_stream(name):
     return pkg_resources.resource_stream(__name__, os.path.join('resources', name))
 
 
-sample_filename = 'sample.docx'
+_sample_filename = 'sample.docx'
 
 
 @pytest.fixture
-def sample_stream(request):
-    return get_resource_stream(sample_filename)
+def sample_stream():
+    return get_resource_stream(_sample_filename)
 
 
 @pytest.fixture
-def sample_filename(request):
-    return get_resource_filename(sample_filename)
+def sample_filename():
+    return get_resource_filename(_sample_filename)
 
 
 @pytest.fixture
-def table_data(request):
+def table_data():
     data = [
         ['Name', 'Age'],
         ['Christian', 29],

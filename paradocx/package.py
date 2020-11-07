@@ -56,6 +56,7 @@ class WordPackage(OfficePackage):
 
 if __name__ == '__main__':
     import sys
+    import codecs
     from textwrap import dedent
     from this import s as zen_encoded
     from openpack.basepack import CoreProperties
@@ -69,7 +70,7 @@ if __name__ == '__main__':
         </w:p>
         """
     ).lstrip()
-    raw_zen = zen_encoded.decode('rot13')
+    raw_zen = codecs.decode(zen_encoded, 'rot13')
     zen = "".join(trun % line for line in raw_zen.splitlines())
 
     body = (
@@ -93,7 +94,7 @@ if __name__ == '__main__':
         % (sys.version, zen)
     )
     op = WordPackage()
-    op.start_part.data = body.decode('utf-8')
+    op.start_part.data = body
     cp = CoreProperties(op, '/docProps/core.xml')
     cp.encoding = 'utf-8'
     op.add(cp)

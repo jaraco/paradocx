@@ -6,6 +6,7 @@ from __future__ import with_statement
 
 import mimetypes
 import warnings
+import pytest
 
 from paradocx.image import ImagePart
 
@@ -16,7 +17,8 @@ def test_content_types():
     assert part.content_type in jpeg_types
     part = ImagePart(None, '/word/media/bar.jpeg')
     assert part.content_type in jpeg_types
-    part = ImagePart(None, '/foo/bar/strange eps file.eps')
+    with pytest.warns(UserWarning):
+        part = ImagePart(None, '/foo/bar/strange eps file.eps')
     assert part.content_type == 'application/postscript'
     part = ImagePart(None, '/name without extension')
     assert part.content_type is None

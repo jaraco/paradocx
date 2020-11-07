@@ -1,13 +1,21 @@
-.. image:: https://img.shields.io/pypi/v/paradocx.svg
-   :target: https://pypi.org/project/paradocx
+.. image:: https://img.shields.io/pypi/v/skeleton.svg
+   :target: `PyPI link`_
 
-.. image:: https://img.shields.io/pypi/pyversions/paradocx.svg
+.. image:: https://img.shields.io/pypi/pyversions/skeleton.svg
+   :target: `PyPI link`_
 
-.. image:: https://img.shields.io/travis/yougov/paradocx/master.svg
-   :target: https://travis-ci.org/yougov/paradocx
+.. _PyPI link: https://pypi.org/project/paradocx
 
-.. image:: https://readthedocs.org/projects/paradocx/badge/?version=latest
-   :target: https://paradocx.readthedocs.io/en/latest/?badge=latest
+.. image:: https://github.com/yougov/paradocx/workflows/Automated%20Tests/badge.svg
+   :target: https://github.com/yougov/paradocx/actions?query=workflow%3A%22Automated+Tests%22
+   :alt: Automated Tests
+
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+   :target: https://github.com/psf/black
+   :alt: Code style: Black
+
+.. .. image:: https://readthedocs.org/projects/skeleton/badge/?version=latest
+..    :target: https://skeleton.readthedocs.io/en/latest/?badge=latest
 
 ``paradocx`` builds on the Open Office XML Spec provided by openpack to
 provide interfaces for working with Microsoft Word documents in the

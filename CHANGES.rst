@@ -1,3 +1,8 @@
+v1.3.2
+======
+
+Unpin openpack and tweak tests.
+
 v1.3.1
 ======
 

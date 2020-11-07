@@ -1,6 +1,8 @@
-import pkg_resources
 import os
 import tempfile
+
+import pytest
+import pkg_resources
 
 
 def get_resource_filename(name):
@@ -16,15 +18,18 @@ def get_resource_stream(name):
 sample_filename = 'sample.docx'
 
 
-def pytest_funcarg__sample_stream(request):
+@pytest.fixture
+def sample_stream(request):
 	return get_resource_stream(sample_filename)
 
 
-def pytest_funcarg__sample_filename(request):
+@pytest.fixture
+def sample_filename(request):
 	return get_resource_filename(sample_filename)
 
 
-def pytest_funcarg__table_data(request):
+@pytest.fixture
+def table_data(request):
 	data = [
 		['Name', 'Age'],
 		['Christian', 29],
@@ -35,7 +40,8 @@ def pytest_funcarg__table_data(request):
 	return data
 
 
-def pytest_funcarg__writable_filename(request):
+@pytest.fixture
+def writable_filename(request):
 	"""
 	Whenever a function needs a 'writable_filename', create one, but
 	be sure it's cleaned up afterward.

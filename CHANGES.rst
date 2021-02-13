@@ -1,3 +1,8 @@
+v1.4.1
+======
+
+Cleaned up extraneous packages from install.
+
 v1.4.0
 ======
 

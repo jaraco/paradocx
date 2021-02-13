@@ -6,8 +6,8 @@
 
 .. _PyPI link: https://pypi.org/project/paradocx
 
-.. image:: https://github.com/yougov/paradocx/workflows/tests/badge.svg
-   :target: https://github.com/yougov/paradocx/actions?query=workflow%3A%22tests%22
+.. image:: https://github.com/jaraco/paradocx/workflows/tests/badge.svg
+   :target: https://github.com/jaraco/paradocx/actions?query=workflow%3A%22tests%22
    :alt: tests
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
@@ -88,7 +88,7 @@ operations involving constructing a Word document use some form of this class
 (the `paradocx.Document` subclasses `WordPackage`).
 
 See `the source
-<https://github.com/yougov/paradocx/blob/master/paradocx/package.py>`_
+<https://github.com/jaraco/paradocx/blob/master/paradocx/package.py>`_
 for a trivial example of usage.
 
 Each `WordPackage` is a container of a number of related parts. The parts

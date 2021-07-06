@@ -1,5 +1,3 @@
-import six
-
 from paradocx.util import w
 from paradocx.package import WordPackage
 
@@ -34,7 +32,7 @@ def run(text=None, bold=False, italic=False, font=None):
     if len(rPr):
         r.append(rPr)
     if text:
-        r.append(w.t(six.text_type(text)))
+        r.append(w.t(str(text)))
     return r
 
 
@@ -51,8 +49,8 @@ def paragraph(text=None, style=None, pagebreak=None):
     if len(pPr):
         subs.append(pPr)
     if text:
-        if isinstance(text, six.string_types):
-            text = six.text_type(text)
+        if isinstance(text, str):
+            text = str(text)
             subs.append(w.r(w.t(text)))
         elif hasattr(text, 'tag'):
             subs.append(text)

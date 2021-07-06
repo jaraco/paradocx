@@ -2,28 +2,16 @@ import os
 import tempfile
 
 import pytest
-import pkg_resources
-
-
-def get_resource_filename(name):
-    return pkg_resources.resource_filename(__name__, os.path.join('resources', name))
-
-
-def get_resource_stream(name):
-    return pkg_resources.resource_stream(__name__, os.path.join('resources', name))
-
-
-_sample_filename = 'sample.docx'
 
 
 @pytest.fixture
 def sample_stream():
-    return get_resource_stream(_sample_filename)
+    return open('tests/resources/sample.docx', mode='rb')
 
 
 @pytest.fixture
 def sample_filename():
-    return get_resource_filename(_sample_filename)
+    return 'tests/resources/sample.docx'
 
 
 @pytest.fixture

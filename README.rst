@@ -17,6 +17,9 @@
 .. .. image:: https://readthedocs.org/projects/skeleton/badge/?version=latest
 ..    :target: https://skeleton.readthedocs.io/en/latest/?badge=latest
 
+.. image:: https://img.shields.io/badge/skeleton-2021-informational
+   :target: https://blog.jaraco.com/skeleton
+
 ``paradocx`` builds on the Open Office XML Spec provided by openpack to
 provide interfaces for working with Microsoft Word documents in the
 Office 2007 'docx' format.

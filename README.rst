@@ -1,10 +1,7 @@
 .. image:: https://img.shields.io/pypi/v/paradocx.svg
-   :target: `PyPI link`_
+   :target: https://pypi.org/project/paradocx
 
 .. image:: https://img.shields.io/pypi/pyversions/paradocx.svg
-   :target: `PyPI link`_
-
-.. _PyPI link: https://pypi.org/project/paradocx
 
 .. image:: https://github.com/jaraco/paradocx/workflows/tests/badge.svg
    :target: https://github.com/jaraco/paradocx/actions?query=workflow%3A%22tests%22

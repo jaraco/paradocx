@@ -1,3 +1,8 @@
+v1.4.4
+======
+
+Packaging refresh and fix ``ResourceWarnings``.
+
 v1.4.3
 ======
 

@@ -31,6 +31,14 @@ link_files = {
 # Be strict about any broken references
 nitpicky = True
 
+nitpick_ignore = [
+    ('py:class', 'paradocx.package.WordPackage'),
+    ('py:class', 'openpack.basepack.Part'),
+    ('py:class', 'lxml.etree.ElementBase'),
+    ('py:class', 'openpack.basepack.DefaultNamed'),
+    ('py:class', 'openpack.basepack.Part'),
+]
+
 # Include Python intersphinx mapping to prevent failures
 # jaraco/skeleton#51
 extensions += ['sphinx.ext.intersphinx']

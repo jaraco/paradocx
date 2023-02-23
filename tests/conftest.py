@@ -6,7 +6,8 @@ import pytest
 
 @pytest.fixture
 def sample_stream():
-    return open('tests/resources/sample.docx', mode='rb')
+    with open('tests/resources/sample.docx', mode='rb') as stream:
+        yield stream
 
 
 @pytest.fixture

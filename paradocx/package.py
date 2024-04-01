@@ -73,9 +73,8 @@ if __name__ == '__main__':
     raw_zen = codecs.decode(zen_encoded, 'rot13')
     zen = "".join(trun % line for line in raw_zen.splitlines())
 
-    body = (
-        dedent(
-            """
+    body = dedent(
+        """
         <?xml version="1.0" encoding="utf-8"?>
         <w:document
         xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
@@ -90,9 +89,7 @@ if __name__ == '__main__':
             </w:body>
         </w:document>
         """
-        ).lstrip()
-        % (sys.version, zen)
-    )
+    ).lstrip() % (sys.version, zen)
     op = WordPackage()
     op.start_part.data = body
     cp = CoreProperties(op, '/docProps/core.xml')

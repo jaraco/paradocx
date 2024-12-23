@@ -9,7 +9,7 @@ STYLES = '{%s}' % style_ns
 
 class StylesPart(DefaultNamed, Part):
     content_type = (
-        "application/" "vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"
     )
     rel_type = (
         "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles"

@@ -69,11 +69,8 @@ type = [
 	"pytest-mypy >= 1.0.1; platform_python_implementation != 'PyPy'",
 
 	# local
+	"lxml-stubs",
 ]
 
 
 [tool.setuptools_scm]
-
-
-[tool.pytest-enabler.mypy]
-# Disabled due to jaraco/skeleton#143
